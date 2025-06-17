@@ -1,4 +1,4 @@
-# django-s3-upload
+# django-admin-s3-upload
 
 ## Compatibility
 
@@ -26,7 +26,7 @@ Features include:
 
 Install with Pip:
 
-`pip install django-s3-upload`
+`pip install git+https://github.com/mentora-ai/django-admin-s3-upload.git`
 
 ## AWS Setup
 
@@ -65,7 +65,7 @@ applied:
 ]
 ```
 
-Note that in order to use the EC2 instance profile, django-s3-upload needs to query the EC2 instance
+Note that in order to use the EC2 instance profile, django-admin-s3-upload needs to query the EC2 instance
 metadata using utility functions from the [botocore] [] package. You already have `botocore`
 installed if `boto3` is a dependency of your project.
 
@@ -222,8 +222,8 @@ class MyView(FormView):
 Examples of both approaches can be found in the examples folder. To run them:
 
 ```shell
-$ git clone git@github.com:yunojuno/django-s3-upload.git
-$ cd django-s3-upload
+$ git clone git@github.com:mentora-ai/django-admin-s3-upload.git
+$ cd django-admin-s3-upload
 
 # Add your AWS keys to your environment
 export AWS_ACCESS_KEY_ID='...'
