@@ -25,8 +25,12 @@ def create_upload_data(  # noqa: C901
     token: str | None = None,
 ) -> dict[str, Any]:
     """Generate AWS upload payload."""
-    access_key = settings.AWS_ACCESS_KEY_ID
-    secret_access_key = settings.AWS_SECRET_ACCESS_KEY
+    access_key = getattr(settings, "S3UPLOAD_ACCESS_KEY_ID", None) or getattr(
+        settings, "AWS_ACCESS_KEY_ID", None
+    )
+    secret_access_key = getattr(settings, "S3UPLOAD_SECRET_ACCESS_KEY", None) or getattr(
+        settings, "AWS_SECRET_ACCESS_KEY", None
+    )
     bucket = bucket or settings.AWS_STORAGE_BUCKET_NAME
     region = settings.S3UPLOAD_REGION
     bucket_url = get_bucket_endpoint_url(bucket, region)
@@ -144,8 +148,10 @@ def get_signed_download_url(
     bucket_name = bucket_name or settings.AWS_STORAGE_BUCKET_NAME
     s3 = boto3.client(
         "s3",
-        aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-        aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
+        aws_access_key_id=getattr(settings, "S3UPLOAD_ACCESS_KEY_ID", None)
+        or getattr(settings, "AWS_ACCESS_KEY_ID", None),
+        aws_secret_access_key=getattr(settings, "S3UPLOAD_SECRET_ACCESS_KEY", None)
+        or getattr(settings, "AWS_SECRET_ACCESS_KEY", None),
     )
     download_url = s3.generate_presigned_url(
         "get_object", Params={"Bucket": bucket_name, "Key": key}, ExpiresIn=ttl
