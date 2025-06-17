@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "django-admins3-upload"
+name = "django-admin-s3-upload"
 version = "1.1.0"
 description = "Integrates direct client-side uploading to s3 with Django."
 authors = ["YunoJuno <code@yunojuno.com>"]
